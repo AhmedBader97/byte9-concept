@@ -19,7 +19,7 @@ git clone https://github.com/AhmedBader97/byte9-concept.git
 cd byte9-concept
 npm install
 npm run dev        # http://localhost:3000
-npm test           # 108 tests
+npm test           # 109 tests
 npm run typecheck  # TypeScript, strict mode
 npm run build      # production build (39 pages, all prerendered except the API)
 npm start          # serve the production build
@@ -107,7 +107,7 @@ Static generation, self-hosted variable fonts through `next/font` (preloaded, si
 
 Measured on a local production build with Lighthouse 13.5, after the motion pass (homepage, desktop preset, median of three runs): **performance 99, accessibility 100, best practices 100, CLS 0**. A mobile run in the build sandbox scored 94. Sandbox CPU is noisy, so check the deployed site with PageSpeed Insights. SEO is intentionally low: the concept blocks indexing.
 
-### Tests (108)
+### Tests (109)
 | Area | File |
 | --- | --- |
 | Content integrity (unique slugs, required copy, quote length) | `src/content/__tests__/content.test.ts` |
@@ -134,7 +134,7 @@ Measured on a local production build with Lighthouse 13.5, after the motion pass
 | SASS / BEM | `src/styles` |
 | Git | This repository |
 | AngularJS / React | Next.js App Router, React 19 server and client components |
-| Jest / Mocha / Chai | 108 Jest tests with React Testing Library and jest-axe |
+| Jest / Mocha / Chai | 109 Jest tests with React Testing Library and jest-axe |
 | Isomorphic React | Build-time server rendering plus hydration; one GraphQL schema on both sides |
 | APIs / GraphQL | `/api/graphql` |
 | Mobile environments | Touch-sized targets, full-screen mobile menu, device previews in the builder |
