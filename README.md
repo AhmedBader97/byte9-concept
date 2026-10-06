@@ -4,6 +4,8 @@ An **unofficial** redesign of [thebyte9.com](https://www.thebyte9.com), built by
 
 Every page and fact from the current site is carried over: 11 case studies, 9 insights and news posts, 5 jobs, the About, Blaze, Sphere and Contact pages, and 46 older posts linked to the originals. The copy is rewritten, client names are set in type rather than reusing logos, and the stock photography is replaced with artwork generated in code.
 
+**Live:** [byte9-concept-by-ahmed.vercel.app](https://byte9-concept-by-ahmed.vercel.app)
+
 **Stack:** Next.js 16 (App Router) · React 19 · TypeScript · SASS with BEM · GraphQL · Jest + React Testing Library + jest-axe
 
 ---
@@ -34,7 +36,7 @@ On vercel.com, choose **Add New → Project**, then fill in the import screen li
 | Field | Value |
 | --- | --- |
 | Import Git Repository | `byte9-concept` |
-| Project Name | `ahmed-bader-concept` (keep Byte9’s name out of the URL) |
+| Project Name | `byte9-concept-by-ahmed` (your name in it, so it can’t be mistaken for Byte9’s own site) |
 | Framework Preset | Next.js (detected automatically) |
 | Root Directory | `./` |
 | Build Command | leave the default (`next build`) |
@@ -42,7 +44,7 @@ On vercel.com, choose **Add New → Project**, then fill in the import screen li
 | Install Command | leave the default (`npm install`) |
 | Environment Variables | none needed |
 
-Press **Deploy**. The site will be live at `https://ahmed-bader-concept.vercel.app` (or whatever project name you chose). Every push to `main` redeploys it.
+Press **Deploy**. The site goes live at `https://byte9-concept-by-ahmed.vercel.app`, and every push to `main` redeploys it.
 
 ### 2. After the first deploy
 
