@@ -56,12 +56,16 @@ describe('<ClientStrip /> marquee', () => {
 });
 
 describe('scroll reveals', () => {
-  it('never hides content that is already on screen', () => {
+  // Reveals are measured in a microtask, after the router has settled the scroll position.
+  const flush = () => act(async () => {});
+
+  it('never hides content that is already on screen', async () => {
     const { container } = render(
       <PageTransition>
         <h2 data-reveal>On screen</h2>
       </PageTransition>,
     );
+    await flush();
     expect(container.firstChild).toHaveClass('js-reveal');
     expect(screen.getByText('On screen')).toHaveAttribute('data-revealed', 'instant');
   });
@@ -76,6 +80,9 @@ describe('scroll reveals', () => {
         </ul>
       </PageTransition>,
     );
+    act(() => {
+      jest.runAllTicks();
+    });
     // The test observer reports everything as visible straight away
     const list = screen.getByRole('list');
     expect(list).toHaveAttribute('data-revealed', 'true');
@@ -87,13 +94,32 @@ describe('scroll reveals', () => {
     jest.useRealTimers();
   });
 
-  it('leaves everything visible when motion is reduced', () => {
+  it('picks up a new page that arrives without a remount, as when going from a job back to /jobs', async () => {
+    const { rerender } = render(
+      <PageTransition>
+        <p data-reveal>A job</p>
+      </PageTransition>,
+    );
+    await flush();
+    rerender(
+      <PageTransition>
+        <ul data-reveal="group">
+          <li>Open roles</li>
+        </ul>
+      </PageTransition>,
+    );
+    await flush();
+    expect(screen.getByRole('list')).toHaveAttribute('data-revealed', 'instant');
+  });
+
+  it('leaves everything visible when motion is reduced', async () => {
     const restore = mockReducedMotion(true);
     const { container } = render(
       <PageTransition>
         <p data-reveal>Still here</p>
       </PageTransition>,
     );
+    await flush();
     expect(container.firstChild).not.toHaveClass('js-reveal');
     expect(screen.getByText('Still here')).not.toHaveAttribute('data-revealed');
     restore();
