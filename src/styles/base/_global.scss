@@ -1,0 +1,107 @@
+@use '../abstracts' as *;
+
+::selection {
+  background: color('ember');
+  color: color('ink');
+}
+
+:focus-visible {
+  @include focus-ring;
+}
+
+// Only show focus rings for keyboard users
+:focus:not(:focus-visible) {
+  outline: none;
+}
+
+html {
+  scroll-padding-top: 6rem;
+
+  @include motion-ok {
+    scroll-behavior: smooth;
+  }
+}
+
+.skip-link {
+  position: absolute;
+  left: 1rem;
+  top: -100px;
+  z-index: 100;
+  padding: 0.75rem 1rem;
+  background: color('ember');
+  color: color('ink');
+  font-weight: 650;
+  border-radius: $radius-control;
+  text-decoration: none;
+
+  &:focus {
+    top: 1rem;
+  }
+}
+
+.u-visually-hidden {
+  @include visually-hidden;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+// ---------- page transitions (client-side navigation only) ----------
+.page-transition--animate {
+  @include motion-ok {
+    animation: page-in 420ms $ease-out both;
+  }
+}
+
+@keyframes page-in {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+// The full stop as the ember square from the Byte9 mark (see EmberStop.tsx)
+.ember-stop {
+  display: inline-block;
+  width: 0.17em;
+  height: 0.17em;
+  margin-left: 0.045em;
+  background: color('ember');
+}
+
+// ---------- scroll reveals (see hooks/useScrollReveal.ts) ----------
+// Only ever applied after the hook has run, and only to content below the fold.
+@media (scripting: enabled) and (prefers-reduced-motion: no-preference) {
+  .js-reveal {
+    [data-reveal]:not([data-reveal='group']):not([data-revealed]),
+    [data-reveal='group']:not([data-revealed]) > * {
+      opacity: 0;
+      transform: translateY(24px);
+    }
+
+    [data-reveal][data-revealed='true']:not([data-reveal='group']),
+    [data-reveal='group'][data-revealed='true'] > * {
+      transition:
+        opacity 700ms ease,
+        transform 900ms $ease-out;
+      transition-delay: calc(var(--reveal-i, 0) * 90ms);
+    }
+
+    @for $i from 1 through 8 {
+      [data-reveal='group'] > :nth-child(#{$i}) {
+        --reveal-i: #{$i - 1};
+      }
+    }
+  }
+}

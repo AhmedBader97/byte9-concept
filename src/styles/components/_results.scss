@@ -1,0 +1,124 @@
+@use '../abstracts' as *;
+
+// ---------- results: bar chart built on a semantic table ----------
+.results {
+  display: grid;
+  gap: fluid(40px, 56px);
+
+  @include mq(lg) {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: fluid(40px, 80px, 1024px, 1440px);
+  }
+}
+
+.results__title {
+  margin-bottom: 1rem;
+  padding-bottom: 0.75rem;
+  border-bottom: 1px solid var(--rule);
+  font-size: rem(19px);
+  font-weight: 700;
+  letter-spacing: -0.01em;
+}
+
+.results__table {
+  width: 100%;
+  font-variant-numeric: tabular-nums;
+}
+
+.results__row {
+  th,
+  td {
+    padding-block: 0.6rem;
+    vertical-align: middle;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+  }
+
+  &:hover .results__bar {
+    background: #ff8058;
+  }
+
+  &:hover .results__client {
+    text-decoration: underline;
+    text-underline-offset: 3px;
+  }
+}
+
+.results__label {
+  width: 44%;
+  padding-right: 1rem;
+  text-align: left;
+  font-weight: 650;
+}
+
+.results__client {
+  color: var(--on-surface);
+  text-decoration: none;
+
+  &:focus-visible {
+    @include focus-ring(2px);
+  }
+}
+
+.results__measure {
+  display: block;
+  color: var(--on-surface-muted);
+  font-weight: 400;
+  font-size: rem(14px);
+  line-height: 1.35;
+}
+
+.results__meter {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.results__track {
+  flex: 1;
+  height: 12px;
+}
+
+.results__bar {
+  display: block;
+  height: 100%;
+  // Square at the baseline, 4px rounded data end
+  border-radius: 0 4px 4px 0;
+  background: color('ember');
+  transition: background-color $duration-quick ease;
+}
+
+.results__value {
+  min-width: 4.75ch;
+  font-size: rem(17px);
+  font-weight: 760;
+  text-align: right;
+}
+
+// ---------- results: arrival animation ----------
+// Only hide the bars when scripting is on, so they always show without JS.
+@media (scripting: enabled) and (prefers-reduced-motion: no-preference) {
+  .results__bar {
+    transform: scaleX(0);
+    transform-origin: left center;
+    transition: transform 1100ms $ease-out;
+    transition-delay: calc(120ms + var(--row, 0) * 90ms);
+  }
+
+  .results[data-inview='true'] .results__bar {
+    transform: scaleX(1);
+  }
+
+  .results__row {
+    opacity: 0;
+    transform: translateY(6px);
+    transition:
+      opacity 600ms ease,
+      transform 600ms $ease-out;
+    transition-delay: calc(var(--row, 0) * 70ms);
+  }
+
+  .results[data-inview='true'] .results__row {
+    opacity: 1;
+    transform: none;
+  }
+}

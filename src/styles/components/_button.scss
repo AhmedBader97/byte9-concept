@@ -1,0 +1,128 @@
+@use '../abstracts' as *;
+
+// ---------- button ----------
+.button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  min-height: 3rem;
+  padding: 0.7rem 1.25rem;
+  border: 2px solid transparent;
+  border-radius: $radius-control;
+  font-size: rem(16px);
+  font-weight: 650;
+  line-height: 1.2;
+  text-decoration: none;
+  white-space: nowrap;
+  cursor: pointer;
+  transition:
+    background-color $duration-quick ease,
+    border-color $duration-quick ease,
+    color $duration-quick ease,
+    transform $duration-quick ease;
+
+  &:active {
+    transform: translateY(1px);
+  }
+
+  &:disabled,
+  &[aria-disabled='true'] {
+    cursor: not-allowed;
+    opacity: 0.55;
+  }
+}
+
+.button--primary {
+  // A darker fill sweeps in from the left on hover
+  background:
+    linear-gradient(color('ember-strong'), color('ember-strong')) left center / 0% 100% no-repeat,
+    color('ember');
+  color: color('ink');
+  transition:
+    background-size 320ms $ease-out,
+    color 200ms ease,
+    transform $duration-quick ease;
+
+  &:hover {
+    background-size: 100% 100%;
+    color: color('white');
+  }
+}
+
+.button--secondary {
+  border-color: currentColor;
+  background: transparent;
+  color: var(--on-surface);
+
+  &:hover {
+    background: var(--on-surface);
+    color: var(--surface);
+    border-color: var(--on-surface);
+  }
+}
+
+.button--quiet {
+  padding-inline: 0.25rem;
+  border: 0;
+  border-bottom: 2px solid color('ember');
+  border-radius: 0;
+  min-height: auto;
+  color: var(--on-surface);
+
+  &:hover {
+    color: color('ember-strong');
+  }
+}
+
+.theme-ink .button--quiet:hover {
+  color: color('ember');
+}
+
+.button--small {
+  min-height: 2.5rem;
+  padding: 0.45rem 0.95rem;
+  font-size: rem(15px);
+}
+
+.button-row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.75rem 1.25rem;
+}
+
+// ---------- tag ----------
+.tag {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.2rem 0.65rem;
+  border: 1px solid var(--rule);
+  border-radius: $radius-pill;
+  font-size: rem(13px);
+  font-weight: 560;
+  line-height: 1.5;
+  color: var(--on-surface);
+  background: transparent;
+}
+
+.tag-list {
+  @include bare-list;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+}
+
+// ---------- text-link ----------
+.text-link {
+  color: var(--link);
+  font-weight: 600;
+  text-decoration: underline;
+  text-decoration-color: color('ember');
+  text-decoration-thickness: 2px;
+  text-underline-offset: 4px;
+
+  &:hover {
+    text-decoration-color: currentColor;
+  }
+}

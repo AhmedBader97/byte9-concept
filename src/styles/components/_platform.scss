@@ -1,0 +1,239 @@
+@use '../abstracts' as *;
+
+// ---------- platform: how Blaze fits together ----------
+.platform {
+  --arrow: #{color('ember')};
+}
+
+.platform__flow {
+  display: grid;
+  gap: 2.25rem;
+
+  @include mq(lg) {
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1.25fr) minmax(0, 1fr);
+    gap: 3rem;
+    align-items: stretch;
+  }
+}
+
+.platform__node {
+  position: relative;
+  padding: 1.5rem;
+  border: 1px solid color('line');
+  border-radius: $radius-panel;
+  background: color('paper');
+
+  // Connector arrows: downwards on small screens, sideways on large
+  &:not(:last-child)::after {
+    content: '';
+    position: absolute;
+    left: 50%;
+    bottom: -1.7rem;
+    width: 2px;
+    height: 1.2rem;
+    background: var(--arrow);
+    transform: translateX(-50%);
+
+    @include mq(lg) {
+      left: auto;
+      right: -2.4rem;
+      bottom: auto;
+      top: 50%;
+      width: 1.8rem;
+      height: 2px;
+      transform: none;
+    }
+  }
+
+  &:not(:last-child)::before {
+    content: '';
+    position: absolute;
+    left: 50%;
+    bottom: -1.85rem;
+    width: 9px;
+    height: 9px;
+    border-right: 2px solid var(--arrow);
+    border-bottom: 2px solid var(--arrow);
+    transform: translateX(-50%) rotate(45deg);
+
+    @include mq(lg) {
+      left: auto;
+      right: -2.5rem;
+      bottom: auto;
+      top: calc(50% - 4px);
+      transform: rotate(-45deg);
+    }
+  }
+}
+
+.platform__node--core {
+  border-color: color('ink');
+  background: color('ink');
+  color: color('white');
+  box-shadow: inset 0 4px 0 color('ember');
+}
+
+.platform__heading {
+  margin-bottom: 1rem;
+  font-size: rem(20px);
+  letter-spacing: -0.015em;
+}
+
+.platform__list {
+  @include bare-list;
+  display: grid;
+  gap: 0.5rem;
+
+  li {
+    padding-left: 1rem;
+    position: relative;
+
+    &::before {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 0.7em;
+      width: 6px;
+      height: 6px;
+      border-radius: 1px;
+      background: color('ink');
+    }
+  }
+}
+
+.platform__note {
+  margin-top: 1rem;
+  color: color('muted');
+  font-size: rem(15px);
+}
+
+// Layers of the platform, stacked like the architecture itself
+.platform__stack {
+  @include bare-list;
+  display: grid;
+  gap: 6px;
+
+  li {
+    padding: 0.75rem 0.9rem;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: $radius-panel;
+    background: color('ink-raised');
+    font-weight: 600;
+  }
+
+  li:first-child {
+    border-color: color('ember');
+  }
+}
+
+.platform__base {
+  position: relative;
+  display: grid;
+  gap: 0.75rem;
+  margin-top: 2.5rem;
+  padding-top: 1.75rem;
+  border-top: 2px dashed #c3cadc;
+
+  @include mq(md) {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+
+  &::before {
+    content: 'Plugs into what you already run';
+    position: absolute;
+    top: -0.8rem;
+    left: 0;
+    padding-right: 0.75rem;
+    background: var(--surface);
+    color: color('muted');
+    font-size: rem(14px);
+    font-weight: 560;
+  }
+}
+
+.platform__service {
+  padding: 1rem 1.25rem;
+  border-left: 3px solid color('ink');
+  background: color('paper');
+
+  p {
+    color: color('muted');
+    font-size: rem(15px);
+  }
+}
+
+.platform__service-title {
+  margin-bottom: 0.25rem;
+  font-size: rem(16px);
+  letter-spacing: 0;
+}
+
+// ---------- platform: data in motion ----------
+@include motion-ok {
+  // Connector lines become moving dashes: requests flowing teams → Blaze → audience
+  .platform__node:not(:last-child)::after {
+    background: repeating-linear-gradient(180deg, var(--arrow) 0 6px, transparent 6px 11px);
+    background-size: 2px 22px;
+    animation: flow-y 900ms linear infinite;
+    animation-play-state: paused;
+
+    @include mq(lg) {
+      background: repeating-linear-gradient(90deg, var(--arrow) 0 6px, transparent 6px 11px);
+      background-size: 22px 2px;
+      animation-name: flow-x;
+    }
+  }
+
+  // A pulse travels down the Blaze stack, layer by layer
+  .platform__stack li {
+    position: relative;
+    overflow: hidden;
+
+    &::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(90deg, transparent, rgba(255, 95, 46, 0.28), transparent);
+      transform: translateX(-100%);
+      animation: stack-pulse 4.8s $ease-out infinite;
+      animation-play-state: paused;
+    }
+
+    &:nth-child(2)::after {
+      animation-delay: 0.45s;
+    }
+
+    &:nth-child(3)::after {
+      animation-delay: 0.9s;
+    }
+  }
+
+  .platform-motion[data-inview='true'] {
+    .platform__node::after,
+    .platform__stack li::after {
+      animation-play-state: running;
+    }
+  }
+}
+
+@keyframes flow-x {
+  to {
+    background-position: 22px 0;
+  }
+}
+
+@keyframes flow-y {
+  to {
+    background-position: 0 22px;
+  }
+}
+
+@keyframes stack-pulse {
+  0% {
+    transform: translateX(-100%);
+  }
+  35%,
+  100% {
+    transform: translateX(100%);
+  }
+}

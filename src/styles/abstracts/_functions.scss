@@ -1,0 +1,23 @@
+@use 'sass:math';
+@use 'sass:map';
+@use 'tokens';
+
+/// Converts px to rem (base 16px).
+@function rem($px) {
+  @return math.div($px, 16px) * 1rem;
+}
+
+/// Fluid value between $min and $max across the 360px–1280px viewport range.
+@function fluid($min, $max, $min-vw: 360px, $max-vw: 1280px) {
+  $slope: math.div($max - $min, $max-vw - $min-vw);
+  $intercept: $min - $slope * $min-vw;
+  @return clamp(#{rem($min)}, #{rem($intercept)} + #{$slope * 100}vw, #{rem($max)});
+}
+
+/// Reads a colour token as a CSS custom property reference.
+@function color($name) {
+  @if not map.has-key(tokens.$colors, $name) {
+    @error 'Unknown colour token: #{$name}';
+  }
+  @return var(--color-#{$name});
+}

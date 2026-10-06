@@ -1,0 +1,190 @@
+@use '../abstracts' as *;
+
+// ---------- req-table ----------
+.req-table {
+  width: 100%;
+  border-top: 2px solid color('ink');
+
+  th,
+  td {
+    padding: 1rem 1rem 1rem 0;
+    border-bottom: 1px solid var(--rule);
+    text-align: left;
+    vertical-align: top;
+  }
+
+  thead th {
+    color: var(--on-surface-muted);
+    font-size: rem(14px);
+    font-weight: 600;
+  }
+
+  tbody th {
+    width: 34%;
+    font-weight: 700;
+  }
+
+  td {
+    color: var(--on-surface-muted);
+  }
+
+  code {
+    color: var(--on-surface);
+  }
+
+  @media (max-width: 767px) {
+    thead {
+      @include visually-hidden;
+    }
+
+    tr {
+      display: block;
+      padding-block: 1rem;
+      border-bottom: 1px solid var(--rule);
+    }
+
+    tbody th,
+    td {
+      display: block;
+      width: auto;
+      padding: 0;
+      border: 0;
+    }
+
+    td {
+      margin-top: 0.35rem;
+    }
+  }
+}
+
+code {
+  font-family: ui-monospace, 'SF Mono', Menlo, Consolas, monospace;
+  font-size: 0.9em;
+}
+
+// ---------- playground ----------
+.playground__presets {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-bottom: 1.5rem;
+
+  .work-index__tab {
+    border-color: rgba(255, 255, 255, 0.25);
+    background: transparent;
+    color: color('white');
+
+    &:hover {
+      border-color: color('white');
+    }
+
+    &[aria-pressed='true'] {
+      border-color: color('ember');
+      background: color('ember');
+      color: color('ink');
+    }
+  }
+}
+
+.playground__grid {
+  display: grid;
+  gap: 1.5rem;
+
+  @include mq(lg) {
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  }
+}
+
+.playground__editor {
+  display: grid;
+  gap: 0.6rem;
+  align-content: start;
+
+  .button {
+    justify-self: start;
+    margin-top: 0.5rem;
+  }
+}
+
+.playground__label {
+  color: var(--on-surface-muted);
+  font-size: rem(14px);
+  font-weight: 600;
+}
+
+.playground__code,
+.playground__result {
+  width: 100%;
+  margin: 0;
+  padding: 1rem;
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  border-radius: $radius-control;
+  background: color('ink-deep');
+  color: #e4e8f7;
+  font-family: ui-monospace, 'SF Mono', Menlo, Consolas, monospace;
+  font-size: rem(13.5px);
+  line-height: 1.55;
+}
+
+.playground__code {
+  resize: vertical;
+
+  &:focus-visible {
+    @include focus-ring(2px, color('ember'));
+  }
+}
+
+.playground__code--small {
+  min-height: 3.5rem;
+}
+
+.playground__output {
+  display: grid;
+  gap: 0.6rem;
+  align-content: start;
+  min-width: 0;
+}
+
+.playground__result {
+  min-height: 18rem;
+  max-height: 28rem;
+  overflow: auto;
+  white-space: pre;
+  scrollbar-width: thin;
+}
+
+.playground__result--error {
+  border-color: color('ember');
+}
+
+// ---------- metric band on light ----------
+.metric-band__list--light .metric-band__value {
+  color: color('ink');
+}
+
+// ---------- not-found ----------
+.not-found {
+  padding-block: fluid(64px, 140px);
+}
+
+.not-found__grid {
+  display: grid;
+  grid-template-columns: repeat(3, 2.5rem);
+  gap: 0.4rem;
+  margin-bottom: 2rem;
+
+  span {
+    aspect-ratio: 1;
+    border-radius: 6px;
+    background: color('ink');
+  }
+
+  span:nth-child(9) {
+    background: transparent;
+    border: 2px dashed color('ember');
+  }
+}
+
+.not-found__actions {
+  margin-top: 2rem;
+}

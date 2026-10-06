@@ -1,0 +1,39 @@
+@use 'sass:map';
+@use '../abstracts' as *;
+
+:root {
+  @each $name, $value in $colors {
+    --color-#{$name}: #{$value};
+  }
+
+  // Section theme hooks: components read these, sections override them.
+  --surface: var(--color-paper);
+  --on-surface: var(--color-ink);
+  --on-surface-muted: var(--color-muted);
+  --rule: var(--color-line);
+  --focus-color: var(--color-ember-strong);
+  --link: var(--color-ink);
+
+  --space-section: #{fluid(64px, 120px)};
+  --gutter: #{fluid(16px, 40px)};
+
+  color-scheme: light;
+}
+
+// A dark section flips the theme hooks for everything inside it.
+.theme-ink {
+  --surface: var(--color-ink);
+  --on-surface: var(--color-white);
+  --on-surface-muted: #c7cfee;
+  --rule: rgba(255, 255, 255, 0.16);
+  --focus-color: var(--color-ember);
+  --link: var(--color-sky);
+
+  background-color: var(--surface);
+  color: var(--on-surface);
+}
+
+.theme-white {
+  --surface: var(--color-white);
+  background-color: var(--surface);
+}

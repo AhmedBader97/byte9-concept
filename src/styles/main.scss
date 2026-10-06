@@ -1,0 +1,35 @@
+// ============================================================
+// Byte9 concept: stylesheet entry
+//
+// Architecture (a trimmed 7-1 pattern):
+//   abstracts/   tokens, functions, mixins (no CSS output)
+//   base/        custom properties, reset, typography, globals
+//   layout/      container, section, page intro, splits
+//   components/  one partial per BEM block family
+//
+// Naming: BEM. block, block__element, block--modifier.
+// No utility framework; components own their styles.
+// ============================================================
+
+@use 'base/root';
+@use 'base/reset';
+@use 'base/typography';
+@use 'base/global';
+
+@use 'layout/layout';
+
+@use 'components/button';
+@use 'components/chrome';
+@use 'components/hero';
+@use 'components/builder';
+@use 'components/home';
+@use 'components/results';
+@use 'components/platform';
+@use 'components/cards';
+@use 'components/cover';
+@use 'components/detail';
+@use 'components/work';
+@use 'components/jobs';
+@use 'components/forms';
+@use 'components/concept';
+@use 'components/sphere';

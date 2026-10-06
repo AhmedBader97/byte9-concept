@@ -1,0 +1,309 @@
+@use '../abstracts' as *;
+
+// ---------- breadcrumb ----------
+.breadcrumb {
+  margin-bottom: 1.5rem;
+  font-size: rem(15px);
+
+  ol {
+    @include bare-list;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.25rem 0.5rem;
+  }
+
+  li {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    color: var(--on-surface-muted);
+  }
+
+  li + li::before {
+    content: '/';
+    color: #9aa3c0;
+  }
+
+  a {
+    color: var(--on-surface);
+    font-weight: 560;
+    text-underline-offset: 3px;
+  }
+}
+
+// ---------- prose ----------
+.prose {
+  max-width: 68ch;
+
+  > * + * {
+    margin-top: 1.1rem;
+  }
+
+  h2 {
+    margin-top: 2.5rem;
+    font-size: fluid(24px, 30px);
+    letter-spacing: -0.025em;
+
+    &:first-child {
+      margin-top: 0;
+    }
+  }
+
+  h3 {
+    margin-top: 2rem;
+    font-size: rem(20px);
+  }
+
+  p,
+  li {
+    font-family: $font-serif;
+    font-size: fluid(18px, 20px);
+    line-height: 1.65;
+    font-variation-settings: 'opsz' 18;
+  }
+
+  ul {
+    padding-left: 1.2rem;
+  }
+
+  li + li {
+    margin-top: 0.5rem;
+  }
+
+  li::marker {
+    color: color('ember-strong');
+  }
+}
+
+.prose--sans {
+  p,
+  li {
+    font-family: $font-sans;
+    font-size: rem(17px);
+    line-height: 1.6;
+  }
+}
+
+// ---------- case-hero ----------
+.case-hero {
+  padding-block: fluid(40px, 80px) 0;
+}
+
+.case-hero__meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem 1rem;
+  margin-bottom: 1rem;
+  color: var(--on-surface-muted);
+  font-weight: 560;
+
+  strong {
+    color: var(--on-surface);
+    font-weight: 700;
+  }
+}
+
+.case-hero__title {
+  max-width: 20ch;
+}
+
+.case-hero__lead {
+  margin-top: 1.25rem;
+}
+
+.case-hero__cover {
+  margin-top: fluid(32px, 56px);
+  aspect-ratio: 16 / 7;
+  overflow: hidden;
+  border-radius: $radius-panel;
+  background: color('ink');
+
+  @media (max-width: 767px) {
+    aspect-ratio: 16 / 10;
+  }
+}
+
+// ---------- metric-band ----------
+.metric-band {
+  padding-block: fluid(40px, 64px);
+}
+
+.metric-band__list {
+  @include bare-list;
+  display: grid;
+  gap: 1.75rem 2rem;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+
+  @include mq(lg) {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+}
+
+.metric-band__item {
+  padding-top: 1rem;
+  border-top: 2px solid color('ember');
+}
+
+.metric-band__value {
+  display: block;
+  font-size: fluid(40px, 64px);
+  font-weight: 820;
+  line-height: 1;
+  letter-spacing: -0.04em;
+  font-variant-numeric: tabular-nums;
+}
+
+.metric-band__label {
+  display: block;
+  margin-top: 0.5rem;
+  color: var(--on-surface-muted);
+}
+
+// ---------- fact-list (at a glance) ----------
+.fact-list {
+  display: grid;
+  gap: 1.25rem;
+  padding: 1.5rem;
+  border: 1px solid var(--rule);
+  border-radius: $radius-panel;
+  background: color('white');
+
+  dt {
+    margin-bottom: 0.35rem;
+    color: var(--on-surface-muted);
+    font-size: rem(14px);
+  }
+
+  dd {
+    font-weight: 650;
+  }
+}
+
+.fact-list__title {
+  font-size: rem(18px);
+}
+
+.fact-list__items {
+  display: grid;
+  gap: 1.25rem;
+}
+
+.prose__quote {
+  margin-top: 2.75rem !important;
+  padding-top: 2rem;
+  border-top: 1px solid var(--rule);
+
+  .quote__text {
+    font-size: fluid(24px, 32px);
+  }
+
+  .quote__text p {
+    font: inherit;
+  }
+}
+
+.more-title {
+  margin-bottom: 1.25rem;
+}
+
+// ---------- pager (previous / next) ----------
+.pager {
+  display: grid;
+  gap: 1rem;
+  padding-block: 2rem;
+  border-top: 1px solid var(--rule);
+
+  @include mq(md) {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+.pager__link {
+  display: grid;
+  gap: 0.25rem;
+  padding: 1.25rem;
+  border: 1px solid var(--rule);
+  border-radius: $radius-panel;
+  text-decoration: none;
+  background: color('white');
+
+  span {
+    color: var(--on-surface-muted);
+    font-size: rem(14px);
+  }
+
+  strong {
+    font-size: rem(18px);
+    line-height: 1.3;
+    letter-spacing: -0.01em;
+  }
+
+  &:hover strong {
+    text-decoration: underline;
+    text-decoration-color: color('ember');
+    text-underline-offset: 4px;
+  }
+}
+
+.pager__link--next {
+  @include mq(md) {
+    text-align: right;
+    grid-column: 2;
+  }
+}
+
+// ---------- article header ----------
+.article-meta {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  margin-bottom: 1.25rem;
+  color: var(--on-surface-muted);
+  font-size: rem(15px);
+}
+
+.perks--three {
+  @include mq(lg) {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+
+// ---------- metric values (CountUp root is a span inside a block item) ----------
+.metric-band__value {
+  display: block;
+}
+
+// ---------- scroll-progress ----------
+.scroll-progress {
+  position: fixed;
+  inset: 0 0 auto;
+  z-index: 60;
+  height: 3px;
+  pointer-events: none;
+}
+
+.scroll-progress__bar {
+  height: 100%;
+  background: color('ember');
+  transform: scaleX(0);
+  transform-origin: left center;
+}
+
+// ---------- case-hero cover: gentle parallax where scroll-driven animation is supported ----------
+@supports (animation-timeline: view()) {
+  @include motion-ok {
+    .case-hero__cover .cover {
+      animation: cover-parallax linear both;
+      animation-timeline: view();
+      animation-range: exit -10% exit 100%;
+    }
+  }
+}
+
+// The art drifts down and grows as the page scrolls on. Translate and scale are
+// matched so the top edge never moves: the frame behind never shows.
+@keyframes cover-parallax {
+  to {
+    transform: translateY(6%) scale(1.12);
+  }
+}

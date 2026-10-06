@@ -1,0 +1,71 @@
+@use '../abstracts' as *;
+
+html {
+  font-family: $font-sans;
+  font-size: 100%;
+}
+
+body {
+  font-size: rem(17px);
+  line-height: 1.6;
+  font-weight: 400;
+  color: var(--on-surface);
+  background-color: var(--surface);
+  font-feature-settings: 'ss01' on;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+}
+
+h1,
+h2,
+h3,
+h4 {
+  font-weight: 760;
+  line-height: 1.08;
+  letter-spacing: -0.025em;
+  text-wrap: balance;
+}
+
+.t-display {
+  font-size: fluid(44px, 84px);
+  font-weight: 820;
+  line-height: 0.98;
+  letter-spacing: -0.04em;
+}
+
+.t-h1 {
+  font-size: fluid(38px, 64px);
+  letter-spacing: -0.035em;
+}
+
+.t-h2 {
+  font-size: fluid(30px, 44px);
+}
+
+.t-h3 {
+  font-size: fluid(21px, 26px);
+  letter-spacing: -0.015em;
+  line-height: 1.2;
+}
+
+.t-lead {
+  font-size: fluid(18px, 22px);
+  line-height: 1.5;
+  color: var(--on-surface-muted);
+  max-width: 38em;
+  text-wrap: pretty;
+}
+
+.t-small {
+  font-size: rem(14px);
+  line-height: 1.5;
+}
+
+.t-muted {
+  color: var(--on-surface-muted);
+}
+
+p {
+  text-wrap: pretty;
+}

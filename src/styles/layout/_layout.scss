@@ -1,0 +1,102 @@
+@use '../abstracts' as *;
+
+// ---------- Container ----------
+.container {
+  width: 100%;
+  max-width: calc(#{$container-max} + var(--gutter) * 2);
+  margin-inline: auto;
+  padding-inline: var(--gutter);
+}
+
+.container--narrow {
+  max-width: calc(760px + var(--gutter) * 2);
+}
+
+// ---------- Section ----------
+.section {
+  padding-block: var(--space-section);
+}
+
+.section--tight {
+  padding-block: calc(var(--space-section) * 0.6);
+}
+
+.section__header {
+  display: grid;
+  gap: 1rem;
+  margin-bottom: fluid(32px, 56px);
+
+  @include mq(lg) {
+    grid-template-columns: minmax(0, 7fr) minmax(0, 5fr);
+    align-items: end;
+    gap: 3rem;
+  }
+}
+
+.section__title {
+  max-width: 18ch;
+}
+
+.section__intro {
+  color: var(--on-surface-muted);
+  max-width: 36em;
+}
+
+.section__more {
+  margin-top: fluid(28px, 44px);
+}
+
+// ---------- Page intro (top of inner pages) ----------
+.page-intro {
+  position: relative;
+  isolation: isolate; // keeps the tile field behind the copy
+  overflow: hidden;
+  padding-block: fluid(48px, 96px) fluid(32px, 64px);
+  border-bottom: 1px solid var(--rule);
+}
+
+.page-intro__eyebrow {
+  margin-bottom: 1rem;
+  color: var(--on-surface-muted);
+  font-size: rem(15px);
+  font-weight: 560;
+}
+
+.page-intro__title {
+  max-width: 16ch;
+}
+
+.page-intro__lead {
+  margin-top: 1.25rem;
+}
+
+.page-intro__actions {
+  margin-top: 2rem;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+}
+
+// ---------- Two-column split ----------
+.split {
+  display: grid;
+  gap: fluid(32px, 64px);
+
+  @include mq(lg) {
+    grid-template-columns: minmax(0, 5fr) minmax(0, 7fr);
+    align-items: start;
+  }
+}
+
+.split--even {
+  @include mq(lg) {
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  }
+}
+
+.split__sticky {
+  @include mq(lg) {
+    position: sticky;
+    top: 7rem;
+  }
+}

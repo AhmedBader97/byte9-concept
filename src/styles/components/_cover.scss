@@ -1,0 +1,160 @@
+@use '../abstracts' as *;
+
+// ============================================================
+// cover: generated SVG art, with a bespoke motion per style.
+// Covers animate on card hover/focus, or continuously with
+// .cover--live (case study headers). --cover-play drives every
+// part, so one switch starts or pauses the whole composition.
+// ============================================================
+
+.cover {
+  --cover-play: paused;
+  width: 100%;
+  height: 100%;
+}
+
+.cover--live,
+.case-card:hover .cover,
+.case-card:focus-within .cover {
+  --cover-play: running;
+}
+
+// Parts rotate and scale around their own centre
+.cover__gear,
+.cover__lit,
+.cover__pin,
+.cover__bar,
+.cover__book {
+  transform-box: fill-box;
+  transform-origin: center;
+}
+
+@include motion-ok {
+  // Waves: a bright signal runs along the lit wave; the others drift
+  .cover__signal {
+    stroke-dasharray: 0.12 0.88;
+    animation: cover-signal 3.2s linear infinite;
+    animation-play-state: var(--cover-play);
+  }
+
+  .cover__wave {
+    animation: cover-drift 5s ease-in-out infinite alternate;
+    animation-delay: calc(var(--w, 0) * -0.4s);
+    animation-play-state: var(--cover-play);
+  }
+
+  // Waveform: bars move like audio playing
+  .cover__bar {
+    animation: cover-bar 1.1s ease-in-out infinite alternate;
+    animation-delay: var(--d, 0s);
+    animation-play-state: var(--cover-play);
+  }
+
+  // Parts: meshing gears turn
+  .cover__gear {
+    animation: cover-spin var(--spin, 16s) linear infinite;
+    animation-play-state: var(--cover-play);
+  }
+
+  // Civic: the route marches towards the highlighted service
+  .cover__route {
+    animation: cover-route 1.2s linear infinite;
+    animation-play-state: var(--cover-play);
+  }
+
+  .cover__pin {
+    animation: cover-pulse 1.6s ease-in-out infinite;
+    animation-play-state: var(--cover-play);
+  }
+
+  // Catalogue: the featured product breathes
+  .cover__lit {
+    animation: cover-pulse 2.2s ease-in-out infinite;
+    animation-play-state: var(--cover-play);
+  }
+
+  // Masthead: the type sets itself, line by line
+  .cover__line {
+    animation: cover-type 3.6s ease-in-out infinite;
+    animation-delay: calc(var(--l, 0) * 0.07s);
+    animation-play-state: var(--cover-play);
+  }
+
+  .cover__initial {
+    transition: transform 900ms $ease-out;
+  }
+
+  .case-card:hover .cover__initial {
+    transform: translateX(14px);
+  }
+
+  // Shelf: the highlighted book is pulled from the shelf
+  .cover__book {
+    transform-origin: left bottom;
+    transition: transform 700ms $ease-out;
+  }
+
+  .case-card:hover .cover__book,
+  .cover--live .cover__book {
+    transform: translateY(-18px) rotate(-7deg);
+  }
+}
+
+@keyframes cover-signal {
+  from {
+    stroke-dashoffset: 1;
+  }
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+
+@keyframes cover-drift {
+  from {
+    transform: translateY(-5px);
+  }
+  to {
+    transform: translateY(5px);
+  }
+}
+
+@keyframes cover-bar {
+  from {
+    transform: scaleY(1);
+  }
+  to {
+    transform: scaleY(0.45);
+  }
+}
+
+@keyframes cover-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes cover-route {
+  to {
+    stroke-dashoffset: -12;
+  }
+}
+
+@keyframes cover-pulse {
+  0%,
+  100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.08);
+  }
+}
+
+@keyframes cover-type {
+  0%,
+  100% {
+    opacity: 0.18;
+  }
+  40% {
+    opacity: 0.55;
+  }
+}

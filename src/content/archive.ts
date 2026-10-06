@@ -1,0 +1,56 @@
+import type { ArchiveItem } from './types';
+
+const base = 'https://www.thebyte9.com';
+
+/**
+ * Older posts that this concept doesn't rebuild. They're listed on the Our work
+ * page and link straight to the originals, so nothing from the archive is lost.
+ */
+export const archive: ArchiveItem[] = [
+  { title: 'Boat Pro', kind: 'Case study', url: `${base}/boat-pro-case-study` },
+  { title: 'Boat International virtual boat show', kind: 'Case study', url: `${base}/boat-international-virtual-boat-show-case-study` },
+  { title: 'The Where Pass', kind: 'Case study', url: `${base}/the-where-pass-case-study` },
+  { title: 'Speakers Corner', kind: 'Case study', url: `${base}/speakers-corner-case-study` },
+  { title: 'Wasteland app', kind: 'Case study', url: `${base}/wasteland-app-case-study` },
+  { title: 'In London magazine', kind: 'Case study', url: `${base}/in-london-magazine-case-study` },
+  { title: 'Reducing risk with virtual and hybrid events', kind: 'Insight', url: `${base}/our-work/reduce-risk-with-virtual-and-hybrid-events` },
+  { title: 'First-party data with CookiePro', kind: 'Insight', url: `${base}/our-work/first-party-data-using-cookie-pro` },
+  { title: 'Creating and sharing first-party data with a data layer', kind: 'Insight', url: `${base}/1st-party-data-creation-and-sharing-with-data-layer` },
+  { title: 'Video with JW Player', kind: 'Insight', url: `${base}/article-jw-player` },
+  { title: 'What responsive web design can do for your business', kind: 'Insight', url: `${base}/responsive-web-design-what-can-it-do-for-your-business` },
+  { title: 'How HTML5 and CSS can benefit your business', kind: 'Insight', url: `${base}/how-can-html5-css-benefit-your-business` },
+  { title: '10 ways agile adds value to your project', kind: 'Insight', url: `${base}/10-ways-that-agile-will-add-value-to-your-project` },
+  { title: 'The content marketing manifesto', kind: 'Insight', url: `${base}/the-content-marketing-manifesto-how-your-online-content-strategy-can-benefit-your-business` },
+  { title: 'Affected by Google’s Panda or Penguin updates?', kind: 'Insight', url: `${base}/affected-by-google-panda-or-penguin-updates` },
+  { title: 'Above the fold: the myth', kind: 'Insight', url: `${base}/above-the-fold-the-myth` },
+  { title: 'Kogan Page ecommerce site launches', kind: 'News', url: `${base}/kogan-page-ecommerce-website-launch` },
+  { title: 'Kogan Page goes international', kind: 'News', url: `${base}/kogan-page-gets-international` },
+  { title: 'Sphere sponsors the British Media Awards', kind: 'News', url: `${base}/sphere-proudly-sponsors-the-british-media-awards` },
+  { title: 'The Pharma Letter shortlisted for the Media Innovation Awards', kind: 'News', url: `${base}/the-pharma-letter-shortlisted-for-the-media-innovation-awards` },
+  { title: 'The Pharma Letter launches', kind: 'News', url: `${base}/the-pharma-letter-launch` },
+  { title: 'Boat Pro launches for Boat International', kind: 'News', url: `${base}/boat-pro-launched-for-boat-international` },
+  { title: 'Two Drum Online Media Award nominations for Boat Pro', kind: 'News', url: `${base}/two-drum-online-media-award-nominations-for-boat-pro` },
+  { title: 'Digiday award winners', kind: 'News', url: `${base}/digiday-award-winners` },
+  { title: 'Get the Gloss wins best website', kind: 'News', url: `${base}/get-the-gloss-best-website-winner` },
+  { title: 'Get the Gloss wins a P&G beauty award', kind: 'News', url: `${base}/get-the-gloss-winner-of-pg-beauty-award` },
+  { title: 'Get the Gloss goes infinite', kind: 'News', url: `${base}/get-the-gloss-gets-infinite` },
+  { title: 'InStyle award and the Gloss World launch', kind: 'News', url: `${base}/instyle-award-and-gloss-world-launch` },
+  { title: 'Wasteland ski bookings app launches', kind: 'News', url: `${base}/wasteland-ski-bookings-app-launch` },
+  { title: 'The Where Pass launches', kind: 'News', url: `${base}/the-where-pass-launch` },
+  { title: 'Speakers Corner redesign launches', kind: 'News', url: `${base}/speakers-corner-re-design-launch` },
+  { title: 'WIPR Leaders directory launches', kind: 'News', url: `${base}/wipr-leaders-directory-launch` },
+  { title: 'World IP Review launches', kind: 'News', url: `${base}/world-ip-review-launch` },
+  { title: 'Life Sciences Intellectual Property Review', kind: 'News', url: `${base}/life-sciences-intellectual-property-review` },
+  { title: 'Linewatch infringements database launches', kind: 'News', url: `${base}/linewatch-infringements-database-launch` },
+  { title: 'Ledbury Research site launches', kind: 'News', url: `${base}/ledbury-research-site-launch` },
+  { title: 'Cayman Funds magazine site', kind: 'News', url: `${base}/cayman-funds-magazine-site` },
+  { title: 'Inkling site launches', kind: 'News', url: `${base}/inkling-site-launch` },
+  { title: 'Inkling gifting service redesign', kind: 'News', url: `${base}/inkling-gifting-service-re-design` },
+  { title: 'The Media Briefing', kind: 'News', url: `${base}/the-media-briefing` },
+  { title: 'The Pharma Boardroom', kind: 'News', url: `${base}/the-pharmaboadroom` },
+  { title: 'Shared Services Link', kind: 'News', url: `${base}/shared-services-link` },
+  { title: 'Bermuda:Re', kind: 'News', url: `${base}/bermuda-re` },
+  { title: 'Get the Job launch event', kind: 'News', url: `${base}/get-the-job-launch-event` },
+  { title: 'Information Industry Network presentation', kind: 'News', url: `${base}/information-industry-network-presentation` },
+  { title: 'We’re hiring: agile development jobs', kind: 'News', url: `${base}/we-re-hiring-agile-development-jobs` },
+];

@@ -1,0 +1,44 @@
+// ============================================================
+// Design tokens
+// One source of truth. Colours are emitted as CSS custom
+// properties in base/_root.scss so components can theme sections.
+// ============================================================
+
+$colors: (
+  'ink': #14214d,        // deep navy: text on light, dark sections
+  'ink-raised': #1d2c63, // panels on ink
+  'ink-deep': #0f1a3d,   // footer
+  'paper': #f5f6fa,      // cool page background
+  'white': #ffffff,
+  'ember': #ff5f2e,      // Blaze signal colour, used sparingly
+  'ember-strong': #e8471a,
+  'muted': #555f80,      // secondary text on light (5.8:1 on paper)
+  'line': #d9deea,       // hairlines and borders on light
+  'sky': #afc0ff,        // accent text on ink (8.7:1)
+  'success': #1f7a50,
+  'error': #b8321a,
+);
+
+// Families come from next/font (src/app/fonts.ts) as CSS variables.
+$font-sans: var(--font-sans), ui-sans-serif, system-ui, -apple-system, 'Segoe UI', sans-serif;
+$font-serif: var(--font-serif), 'Iowan Old Style', Georgia, serif;
+
+// Breakpoints (min-width, mobile first)
+$breakpoints: (
+  'sm': 480px,
+  'md': 768px,
+  'lg': 1024px,
+  'xl': 1280px,
+);
+
+$container-max: 1240px;
+
+// Radii follow hierarchy, not one value for everything
+$radius-control: 6px;   // buttons, inputs
+$radius-panel: 4px;     // content panels
+$radius-device: 16px;   // device frames in the builder demo
+$radius-pill: 999px;    // tags only
+
+$ease-out: cubic-bezier(0.22, 1, 0.36, 1);
+$duration-quick: 160ms;
+$duration-base: 280ms;

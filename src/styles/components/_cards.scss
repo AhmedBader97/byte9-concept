@@ -1,0 +1,159 @@
+@use '../abstracts' as *;
+
+// ---------- case-grid ----------
+.case-grid {
+  display: grid;
+  gap: fluid(28px, 40px) 1.5rem;
+
+  @include mq(md) {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  @include mq(lg) {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+}
+
+.case-grid--three {
+  @include mq(lg) {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+
+// ---------- case-card ----------
+.case-card {
+  position: relative;
+  display: grid;
+  align-content: start;
+  gap: 1rem;
+}
+
+.case-card__media {
+  aspect-ratio: 16 / 10;
+  overflow: hidden;
+  border-radius: $radius-panel;
+  background: color('ink');
+}
+
+.case-card__body {
+  display: grid;
+  gap: 0.4rem;
+}
+
+.case-card__client {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.15rem 0.6rem;
+  font-weight: 700;
+  font-size: rem(15px);
+}
+
+.case-card__sector {
+  color: var(--on-surface-muted);
+  font-weight: 450;
+}
+
+.case-card__title {
+  font-size: rem(20px);
+  line-height: 1.25;
+  letter-spacing: -0.02em;
+}
+
+.case-card__link {
+  text-decoration: none;
+
+  &::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+  }
+
+  &:focus-visible {
+    outline: none;
+
+    &::after {
+      @include focus-ring(4px);
+      border-radius: $radius-panel;
+    }
+  }
+}
+
+// Hover: the cover lifts and leans in a touch (its artwork also starts animating, see _cover.scss)
+.case-card__media {
+  transition: box-shadow 500ms $ease-out;
+
+  @include motion-ok {
+    transition:
+      box-shadow 500ms $ease-out,
+      transform 500ms $ease-out;
+
+    .cover {
+      transition: transform 800ms $ease-out;
+    }
+  }
+}
+
+.case-card:hover .case-card__media {
+  box-shadow: 0 22px 44px -26px rgba(20, 33, 77, 0.6);
+
+  @include motion-ok {
+    transform: translateY(-4px);
+
+    .cover {
+      transform: scale(1.035);
+    }
+  }
+}
+
+.case-card:hover .case-card__link {
+  text-decoration: underline;
+  text-decoration-color: color('ember');
+  text-decoration-thickness: 2px;
+  text-underline-offset: 4px;
+}
+
+.case-card__summary {
+  color: var(--on-surface-muted);
+  max-width: 46ch;
+}
+
+.case-card__metric {
+  display: flex;
+  align-items: baseline;
+  gap: 0.5rem;
+  margin-top: 0.35rem;
+  color: var(--on-surface-muted);
+  font-size: rem(15px);
+
+  strong {
+    color: var(--on-surface);
+    font-size: rem(26px);
+    font-weight: 820;
+    letter-spacing: -0.03em;
+    font-variant-numeric: tabular-nums;
+    box-shadow: inset 0 -0.3em 0 rgba(255, 95, 46, 0.35);
+  }
+}
+
+.case-card--large {
+  @include mq(md) {
+    grid-column: 1 / -1;
+    grid-template-columns: minmax(0, 7fr) minmax(0, 5fr);
+    align-items: center;
+    gap: fluid(24px, 56px);
+  }
+
+  .case-card__title {
+    font-size: fluid(24px, 34px);
+    line-height: 1.12;
+    letter-spacing: -0.03em;
+  }
+
+  .case-card__summary {
+    margin-top: 0.5rem;
+  }
+
+  .case-card__metric strong {
+    font-size: fluid(36px, 52px);
+  }
+}
