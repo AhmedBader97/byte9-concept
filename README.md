@@ -107,6 +107,9 @@ Static generation, self-hosted variable fonts through `next/font` (preloaded, si
 
 Measured on a local production build with Lighthouse 13.5, after the motion pass (homepage, desktop preset, median of three runs): **performance 99, accessibility 100, best practices 100, CLS 0**. A mobile run in the build sandbox scored 94. Sandbox CPU is noisy, so check the deployed site with PageSpeed Insights. SEO is intentionally low: the concept blocks indexing.
 
+### Analytics
+Anonymous, cookie-free page views through Vercel Web Analytics (`src/components/layout/SiteAnalytics.tsx`): pages, times, rough location and device, never who. Turn it on under **Analytics** in the Vercel project. Open any page once with `?me` on the end and that browser's own visits stop being counted.
+
 ### Tests (109)
 | Area | File |
 | --- | --- |
